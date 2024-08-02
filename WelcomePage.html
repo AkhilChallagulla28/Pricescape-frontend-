@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PriceScape-home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 8px 14px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #e0e0e0;
+            color: #e0e0e0;
+        }
+
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+			
+        }
+
+        .category {
+            width: 60%;
+            margin-bottom: 20px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        h2 {
+            color: #1e1e1e;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color:#333;
+            color: #fff;
+            text-align: center;
+
+			padding-top: 5px;
+			padding-bottom: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+			height: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><img src="C:\Users\akhil\Downloads\20231201_101004.png" alt="Nike Jordan Air Force One" width='325' height='70'></h1>
+    </header>
+
+    <div class="category-container">
+        <div class="category" onclick="redirectToPage('hellopage.html')">
+            <h2>Men's Wear</h2>
+            <p>Explore the latest trends in men's fashion.</p>
+        </div>
+        <div class="category" onclick="redirectToPage('hellopage.html')">
+            <h2>Women's Wear</h2>
+            <p>Discover a wide range of women's fashion styles.</p>
+        </div>
+        <div class="category" onclick="redirectToPage('hellopage.html')">
+            <h2>Kids Wear</h2>
+            <p>Cute and comfortable clothing for your little ones.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; PriceScrape. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>

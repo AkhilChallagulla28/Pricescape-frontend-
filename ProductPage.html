@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PriceScape-details</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        #product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #product-image {
+            max-width: 300px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #product-image2 {
+            max-width: 1000px;
+            max-height: 700px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        #product-info {
+            flex-grow: 1;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #1e1e1e;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #price-tracker-container {
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #price-tracker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            color: #1e1e1e;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #price-tab {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            color: #1e1e1e;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 8px 14px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        #suggested-products {
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: flex;
+            justify-content: space-evenly; /* Ensure equal space between product containers */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            max-height: 300px; /* Set a fixed height for the container */
+        }
+
+        .suggested-product {
+            width: calc(33.33% - 20px); /* 33.33% width for each product container with margin */
+            height: 130px;
+            margin-bottom: 20px;
+            margin-right: 10px;
+            padding: 60px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+			cursor: pointer;
+        }
+
+        h3 {
+            color: #1e1e1e;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            position: bottom;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+			height: 10%;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2px 0;
+        }
+		button.addToCart:hover {
+		background-color: #2BB975; /* Change the background color on hover */
+		color: #FFFFFF  ; /* Change the text color on hover */
+		}
+
+		button.addToWishlist:hover {
+		background-color: #E44B12; /* Change the background color on hover */
+		color: #FFFFFF; /* Change the text color on hover */
+		}
+    </style>
+    <script>
+        function trackPrice() {
+            // Get the price input value
+            var price = document.getElementById('price').value;
+
+            // Use AJAX to fetch data from different e-commerce websites
+            fetch('your_api_endpoint_here', {
+                method: 'POST', // or 'GET' based on your API
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ price: price }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the table with the fetched data
+                    updatePriceTable(data);
+
+                    // Update the price graph
+                    updatePriceGraph(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function updatePriceTable(data) {
+            var tbody = document.querySelector('#price-tab tbody');
+            // Clear existing rows
+            tbody.innerHTML = '';
+
+            // Iterate through the data and append rows to the table
+            data.forEach(entry => {
+                var row = tbody.insertRow();
+                var websiteCell = row.insertCell(0);
+                var priceCell = row.insertCell(1);
+
+                websiteCell.textContent = entry.website;
+                priceCell.textContent = entry.price;
+            });
+        }
+
+        function updatePriceGraph(data) {
+            var labels = data.map(entry => entry.website);
+            var prices = data.map(entry => entry.price);
+
+            var ctx = document.getElementById('priceChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Price History',
+                        data: prices,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                    }],
+                },
+                options: {
+                    scales: {
+                        x: [{
+                            type: 'linear',
+                            position: 'bottom',
+                        }],
+                        y: [{
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        }],
+                    },
+                },
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+<header>
+    <h1><img src="C:\Users\akhil\Downloads\20231201_101004.png" alt="Nike Jordan Air Force One" width='275' height='60'></h1>
+</header>
+<nav>
+    <a href="homeps.html">Home</a>
+    <a href="hellopage.html">Topwear</a>
+    <a href="hellopage.html">Bottomwear</a>
+    <a href="hellopage.html">Footwear</a>
+    <a href="hellopage.html">Accesories</a>
+    <a href="hellopage.html">Offers</a>
+	<a href="cart.html">view cart</a>
+    <a href="wishlist.html">Wishlist</a>
+    <!-- Add more categories as needed -->
+</nav>
+
+<div id="product-container">
+    <div id="product-image">
+        <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Nike Jordan Air Force One" style="width: 100%; border-radius: 8px;">
+    </div>
+    <div id="product-info">
+        <h2>Nike Jordan Air Force One</h2>
+        <p>The Nike Jordan Air Force One is a classic sneaker known for its iconic design and comfort. It features the signature Air technology for cushioning and a stylish look that has stood the test of time.</p>
+        <!-- Add the price here -->
+        <p><b>Price: ₹xx,xxx</p> <!-- Replace XXX.XX with the actual price -->
+		<button class="addToCart" onclick="addToCart()">Add to Cart</button>
+		<button class="addToWishlist" onclick="addToWishlist()">Add to Wishlist</button>
+	    <script>
+			function trackPrice() {
+				// Implement price tracking logic here and update the table in the #price-tab section
+				// You may use AJAX to fetch data from different e-commerce websites and update the table dynamically
+			}
+
+			function addToCart() {
+				// Implement your add to cart functionality here
+				alert('Added to Cart');
+			}
+
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+
+
+			function addToWishlist() {
+			// Implement your add to wishlist functionality here
+				alert('Added to Wishlist');
+			}
+	    </script>
+    </div>
+</div>
+
+<div id="price-tracker-container">
+    <h3>Price Tracker</h3>
+    <div id="price-tracker">
+      <!--  <button onclick="trackPrice()">Track Price</button>-->
+        
+        <!-- Add a canvas for the price chart -->
+
+        <div id="product-image2">
+            <img src="C:\Users\akhil\Downloads\pricerange.jpg" alt="price-tracker" style="width: 100%; height:500%; border-radius: 8px;">
+        </div>
+    </div>
+</div>
+
+
+<div id="suggested-products">
+
+    <!-- Add suggested product containers here -->
+    <div class="suggested-product">
+        <p>Product 1: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 1: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 2: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 3: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 4: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 5: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 6: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 7: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 8: Description, Price, etc.</p>
+    </div>
+    <div class="suggested-product">
+        <p>Product 9: Description, Price, etc.</p>
+    </div>
+
+</div>
+<div class="footer">
+    <p>&copy; PriceScrape. All rights reserved.</p>
+</div>
+</body>
+</html>

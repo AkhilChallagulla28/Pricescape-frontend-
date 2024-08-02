@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PriceScape-Wishlist</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 0.1px 0;
+			
+        }
+		body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 1px 0;
+			position: centre;
+			
+        }
+		nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 8px 14px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+		h2 {
+            color: #1e1e1e;
+            margin-bottom: 10px;
+			text-align: center;
+			position: center;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #wishlist-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+        }
+
+        .wishlist-item {
+            width: 250px;
+			height: 400px;
+            margin: 20px;
+            padding: 20px;
+			padding-left:20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: box-shadow 0.3s ease;
+			cursor: pointer;
+			
+        }
+
+        .wishlist-item img {
+            max-width: 90%;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			position:center;
+			float: left;
+        }
+
+        .wishlist-item-info {
+            width: calc(33.33% - 20px);
+            margin: 20px;
+            padding: 20px;
+			align-items: center;
+
+			
+        }
+
+        .wishlist-item-info h3 {
+            color: #1e1e1e;
+            margin-bottom: 10px;
+			align-items: center;
+            
+        }
+
+        .wishlist-item-info p {
+            color: #666;
+        }
+
+		.remove-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 70px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+			position: right;
+			text-align: left;
+		}
+		.remove-btn:hover {
+            background-color: #c0392b;
+        }
+		
+		button {
+            margin-top: 10px;
+            padding: 6px 82px;
+            background-color: #1e1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+			text-align: center;
+			position: center;
+        }
+		button.addToCart:hover {
+		background-color: #2BB975; /* Change the background color on hover */
+		color: #FFFFFF  ; /* Change the text color on hover */
+		}
+    </style>
+</head>
+<body>
+<header>
+    <h1><img src="C:\Users\akhil\Downloads\20231201_101004.png" alt="Nike Jordan Air Force One" width='275' height='60'></h1>
+</header>
+<nav>
+    <a href="homeps.html">Home</a>
+    <a href="hellopage.html">Topwear</a>
+    <a href="hellopage.html">Bottomwear</a>
+    <a href="hellopage.html">Footwear</a>
+    <a href="hellopage.html">Accesories</a>
+    <a href="hellopage.html">Offers</a>
+	<a href="cart.html">view cart</a>
+    <!-- Add more categories as needed -->
+</nav>
+    <!-- Your header, navigation, and other common elements go here -->
+        <h2>Your Wishlist</h2>
+		
+    <div id="wishlist-container">
+
+        <!-- Example wishlist items, replace with actual data from your system -->
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+		
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+		        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+		        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+		        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+		        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+		        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $XX.XX</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+
+        <div class="wishlist-item" onclick="redirectToPage('productpage.html')">
+            <img src="C:\Users\akhil\Downloads\ed23685339ada1b6d88008cbe1a11e98.gif" alt="Product Image">
+            <div class="wishlist-item-info">
+                <h3>Product Name</h3>
+                <p>Price: $YY.YY</p>
+                <button class="remove-btn" onclick="removeWishlistItem(this)">Remove</button>
+				<button class="addToCart" onclick="addToCart()">Cart</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+
+        function removeWishlistItem(button) {
+            // Get the parent wishlist item element
+            var wishlistItem = button.parentElement.parentElement;
+
+            // Remove the wishlist item from the DOM
+            wishlistItem.remove();
+
+            // You can also update the total price or perform other actions as needed
+            updateWishlistTotal();
+        }
+
+        function updateWishlistTotal() {
+            // Implement logic to update the wishlist total based on the remaining wishlist items
+            // You may iterate through wishlist items and calculate the total price
+        }
+					function addToCart() {
+				// Implement your add to cart functionality here
+				alert('Added to Cart');
+			}
+
+        function proceedToPay() {
+            // Implement your logic to handle the "Proceed to Pay" action from the wishlist
+            alert('Redirecting to payment page...');
+            // Add more functionality as needed
+        }
+    </script>
+	<div class="footer">
+    <p>&copy; PriceScrape. All rights reserved.</p>
+	</div>
+
+</body>
+</html>
